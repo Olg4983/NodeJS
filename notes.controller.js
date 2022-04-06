@@ -18,10 +18,20 @@ notes.push(note)
 }
 async function removeNote(id){
     const notes = await getNotes()
-
-   const newNotes= notes.filter(node=>node.id!==id.toString())
-
+if(notes.includes(notes.id===id)){
+    return console.log("This ID is not")
+}
+   const newNotes= notes.filter(node=>node.id!==id.toString()
+   )
     await fs.writeFile(notesPath, JSON.stringify(newNotes))
+}
+
+async function updateNote(id, newTitleNotes){
+    const notes = await getNotes()
+    if(notes.id===id){
+        notes.title=newTitleNotes
+    }
+    await fs.writeFile(notesPath, JSON.stringify(notes))
 }
 
 async function getNotes(){
@@ -38,5 +48,5 @@ notes.forEach(note=>{
 }
 
 module.exports={
-    addNote, printNotes, removeNote
+    addNote, getNotes, removeNote, updateNote
 }
